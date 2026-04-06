@@ -28,15 +28,17 @@
 ```
 Client (Next.js / Vercel)
     ↓ WebSocket
-FastAPI + LangGraph (AWS EC2)
+FastAPI + LangGraph (Google Compute Engine)
     ├── Intent Router (12+1 intent)
     ├── 전용 노드 5개 (place_search, place_recommend, event_search, course_plan, image_search)
     ├── ReAct 에이전트 2개 (search_agent, action_agent)
     └── Response Composer → typed 블록 스트리밍
     ↓
-PostgreSQL+PostGIS ←→ OpenSearch (벡터) ←→ Redis (캐시)
-    ↓
-External APIs: Google Places, Naver Blog/News, Google Calendar(MCP), 서울 열린데이터
+Cloud SQL(PostgreSQL+PostGIS) ←→ OpenSearch(GCE) ←→ Redis (캐시)
+    ↓                                                    ↓
+External APIs: Gemini, Claude, Google Places,    Monitoring(GCE):
+  Naver Blog/News, Google Calendar(MCP),         Grafana+Prometheus+Loki+Jaeger → Slack
+  서울 열린데이터
 ```
 
 ## 빠른 시작
