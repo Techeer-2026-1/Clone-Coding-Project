@@ -48,11 +48,13 @@ External APIs: Gemini, Claude, Google Places,    Monitoring(GCE):
 ```bash
 git clone https://github.com/Techeer-2026-1/localbiz-backend.git
 cd localbiz-backend
-cp .env.example .env   # API 키 설정
-docker-compose up -d   # PostgreSQL + OpenSearch + Redis
-python scripts/init_opensearch.py
+cp .env.example .env   # API 키만 채우기 (DB/OpenSearch 접속 정보는 이미 있음)
+python3.11 -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
 python -m uvicorn src.entry:app --host 0.0.0.0 --port 8000 --reload
 ```
+
+> Docker 불필요 — Cloud SQL(34.47.71.231) + OpenSearch(34.50.28.16) 공동 서버 직접 연결
 
 ### 프론트엔드
 
